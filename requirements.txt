@@ -1,0 +1,4 @@
+pandas
+PyMuPDF
+configparser
+openai
