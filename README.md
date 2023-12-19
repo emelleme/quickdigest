@@ -41,8 +41,6 @@ Edit the `config.ini` file in the QuickDigest directory to specify:
 1.  Place your documents in the specified directory.
 2.  Run the application using:
     
-    cssCopy code
-    
     `python main.py` 
     
 3.  The application will create a CSV file in the specified directory, containing summaries of each document.
