@@ -9,7 +9,10 @@ from openai import OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def extract_text_from_document(file_path):
-    """Extract text from a document file (PDF or DOCX)."""
+    """
+    Extract text from a document file (PDF or DOCX).
+    This function reads text from both paragraphs and tables in DOCX files.
+    """
     text = ""
     if file_path.endswith('.pdf'):
         with fitz.open(file_path) as doc:
@@ -17,12 +20,21 @@ def extract_text_from_document(file_path):
                 text += page.get_text()
     elif file_path.endswith('.docx'):
         doc = docx.Document(file_path)
+        # Extract text from paragraphs
         for para in doc.paragraphs:
             text += para.text + "\n"
+        # Extract text from tables
+        for table in doc.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    text += cell.text + "\t"
+                text += "\n"
     return text
 
 def generate_summary(file_path):
-    """Generate a summary for the given document."""
+    """
+    Generate a summary for the given document using OpenAI's API.
+    """
     # Extract text from the document
     document_text = extract_text_from_document(file_path)
 
@@ -44,7 +56,10 @@ def generate_summary(file_path):
     return summary
 
 def create_csv_from_directory(directory, csv_file):
-    """Create a CSV file with file names from the specified directory."""
+    """
+    Create a CSV file with file names from the specified directory.
+    The CSV will contain filenames of .pdf and .docx files.
+    """
     file_list = [{'file': f} for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and (f.endswith('.pdf') or f.endswith('.docx'))]
     df = pd.DataFrame(file_list)
     df['summary'] = None
@@ -52,6 +67,9 @@ def create_csv_from_directory(directory, csv_file):
     print(f"Created CSV file {csv_file} with file names from {directory}")
 
 def main():
+    """
+    Main function to run the QuickDigest application.
+    """
     # Read configuration file
     config = configparser.ConfigParser()
     config.read('config.ini')

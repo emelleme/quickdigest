@@ -3,11 +3,11 @@
 
 ## Overview
 
-QuickDigest is a Python-based tool designed to automate the summarization of documents into a concise format, ideal for large language models (LLMs) in their information retrieval pipelines. This application scans a specified directory of documents, generates summaries for each using OpenAI's GPT model, and compiles these into a CSV file.
+QuickDigest is a Python-based tool designed to automate the summarization of documents into a concise format, ideal for large language models (LLMs) in their information retrieval pipelines. This application scans a specified directory of documents (including both PDF and `.docx` files), generates summaries for each using OpenAI's GPT model, and compiles these into a CSV file.
 
 ## Features
 
--   Automated document summarization.
+-   Automated document summarization for PDF and `.docx` files.
 -   Compilation of summaries in a CSV file for easy access.
 -   Configurable directory and output file settings.
 -   User-friendly and efficient for batch processing of documents.
@@ -20,7 +20,9 @@ QuickDigest is a Python-based tool designed to automate the summarization of doc
 ## Installation
 
 1.  Clone or download the QuickDigest repository to your local machine.
+    
 2.  Navigate to the QuickDigest folder in your terminal or command prompt.
+    
 3.  Install the necessary dependencies by running:
     
     Copy code
@@ -28,6 +30,7 @@ QuickDigest is a Python-based tool designed to automate the summarization of doc
     `pip install -r requirements.txt` 
     
 4.  Ensure you have set your OpenAI API key in your environment variables.
+    
 
 ## Configuration
 
@@ -38,12 +41,16 @@ Edit the `config.ini` file in the QuickDigest directory to specify:
 
 ## Usage
 
-1.  Place your documents in the specified directory.
+1.  Place your documents (PDF and `.docx`) in the specified directory.
+    
 2.  Run the application using:
+    
+    cssCopy code
     
     `python main.py` 
     
 3.  The application will create a CSV file in the specified directory, containing summaries of each document.
+    
 
 ## .gitignore File
 
